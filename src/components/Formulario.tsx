@@ -85,29 +85,26 @@ const Formulario: React.FC = () => {
                     <label className="block text-sm font-medium mb-1">Email:</label>
                     <input
                         type="email"
-                        {...register('email', { required: true })}
+                        {...register('email', { required: "Email es requerido" })}
                         className="input input-bordered w-full"
                     />
-                    {errors.email && <span className="text-red-500 text-sm">Este campo es requerido</span>}
+                    {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">Clave:</label>
                     <input
                         type="password"
                         {...register('password', {
-                            required: 'Clave es obligatorio',
+                            required: "Clave es requerida",
                             minLength: { value: 8, message: "La clave debe tener al menos 8 caracteres" },
                             pattern: {
                                 value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                                 message: "La clave debe contener al menos un número y un caracter especial"
                             }
-                        },
-
-                        )}
+                        })}
                         className="input input-bordered w-full"
                     />
-                    {errors.password && <span className="text-red-500 text-sm">
-                        {errors.password.message}</span>}
+                    {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">Confirmar Clave:</label>
@@ -115,7 +112,7 @@ const Formulario: React.FC = () => {
                         type="password"
                         {...register('confirmPassword', {
                             required: "Confirmar clave es requerido",
-                            validate: value => value === password || "Las claves no coinciden"
+                            validate: (value: String) => value === password || "Las claves no coinciden"
                         })}
                         className="input input-bordered w-full"
                     />
@@ -126,15 +123,15 @@ const Formulario: React.FC = () => {
                     <label className="block text-sm font-medium mb-1">Nombre:</label>
                     <input
                         type="text"
-                        {...register('name', { required: true })}
+                        {...register('name', { required: "Nombre es requerido" })}
                         className="input input-bordered w-full"
                     />
-                    {errors.name && <span className="text-red-500 text-sm">Este campo es requerido</span>}
+                    {errors.name && <span className="text-red-500 text-sm">{errors.name.message}</span>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">País:</label>
                     <select
-                        {...register('country', { required: true })}
+                        {...register('country', { required: "País es requerido" })}
                         className="select select-bordered w-full"
                     >
                         <option value="">Seleccione un país</option>
@@ -142,7 +139,7 @@ const Formulario: React.FC = () => {
                             <option key={country} value={country}>{country}</option>
                         ))}
                     </select>
-                    {errors.country && <span className="text-red-500 text-sm">Este campo es requerido</span>}
+                    {errors.country && <span className="text-red-500 text-sm">{errors.country.message}</span>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">Teléfono:</label>
@@ -162,7 +159,6 @@ const Formulario: React.FC = () => {
                 </div>
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">Foto:</label>
-
                     <input
                         type="file"
                         {...register('photo', {
@@ -175,12 +171,11 @@ const Formulario: React.FC = () => {
                         className="file-input file-input-bordered w-full"
                     />
                     {errors.photo && <span className="text-red-500 text-sm">{errors.photo.message}</span>}
-
                 </div>
                 <button type="submit" className="btn btn-primary w-full">Enviar</button>
             </form>
         </div>
     );
-}
+};
 
 export default Formulario;
